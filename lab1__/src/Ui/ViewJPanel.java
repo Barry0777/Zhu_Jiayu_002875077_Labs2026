@@ -61,7 +61,7 @@ public class ViewJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 102, 102));
 
-        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lblTitle.setText("View a Product");

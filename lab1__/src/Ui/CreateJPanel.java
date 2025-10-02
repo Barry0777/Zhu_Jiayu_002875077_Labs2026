@@ -63,7 +63,7 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
-        setBackground(new java.awt.Color(255, 102, 102));
+        setBackground(new java.awt.Color(204, 255, 255));
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lblTitle.setText("Create a Product");
