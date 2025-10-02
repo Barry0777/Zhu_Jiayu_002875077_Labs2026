@@ -13,8 +13,11 @@ public class CreateJPanel extends javax.swing.JPanel {
     /**
      * Creates new form createjpanel
      */
-    public CreateJPanel() {
+    VitalSignHistory history;
+    public CreateJPanel(VitalSignHistory vsh) {
         initComponents();
+        this.history = vsh;
+        
     }
 
     /**
@@ -26,19 +29,85 @@ public class CreateJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel1 = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        lblTemperature = new javax.swing.JLabel();
+        lblBp = new javax.swing.JLabel();
+        lblPulse = new javax.swing.JLabel();
+        lblConscious = new javax.swing.JLabel();
+        fieldDate = new javax.swing.JTextField();
+        fieldTemperature = new javax.swing.JTextField();
+        fieldBp = new javax.swing.JTextField();
+        fieldPulse = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+
+        setBackground(new java.awt.Color(255, 204, 204));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel1.setText("Create Vital Sign");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+
+        lblDate.setText("Date");
+        add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
+
+        lblTemperature.setText("Temperature");
+        add(lblTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, -1));
+
+        lblBp.setText("Blood Pressure");
+        add(lblBp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
+
+        lblPulse.setText("Pulse");
+        add(lblPulse, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, -1));
+
+        lblConscious.setText("Conscious Status");
+        add(lblConscious, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
+
+        fieldDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldDateActionPerformed(evt);
+            }
+        });
+        add(fieldDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+
+        fieldTemperature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldTemperatureActionPerformed(evt);
+            }
+        });
+        add(fieldTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
+        add(fieldBp, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
+        add(fieldPulse, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
+
+        jRadioButton1.setText("Yes");
+        add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, 20));
+
+        jRadioButton2.setText("No");
+        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void fieldDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldDateActionPerformed
+
+    private void fieldTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldTemperatureActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldTemperatureActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField fieldBp;
+    private javax.swing.JTextField fieldDate;
+    private javax.swing.JTextField fieldPulse;
+    private javax.swing.JTextField fieldTemperature;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel lblBp;
+    private javax.swing.JLabel lblConscious;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblPulse;
+    private javax.swing.JLabel lblTemperature;
     // End of variables declaration//GEN-END:variables
 }
