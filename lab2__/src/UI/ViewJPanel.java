@@ -188,27 +188,23 @@ if (selectedVital != null) {
 if (selectedRow < 0) {
     JOptionPane.showMessageDialog(
         this,
-        "Please select a row to view",
+        "Please select a row to delete",
         "Warning",
-        JOptionPane.WARNING_MESSAGE
-    );
+        JOptionPane.WARNING_MESSAGE);
 }
 
 DefaultTableModel model = (DefaultTableModel) tblVital.getModel();
 VitalSign selectedVital = (VitalSign) model.getValueAt(selectedRow, 0);
 
-if (selectedVital != null) {
-    fieldDate.setText(selectedVital.getDate());
-    fieldTemperature.setText(String.valueOf(selectedVital.getTemperature()));
-    fieldBp.setText(String.valueOf(selectedVital.getBloodPressure()));
-    fieldPulse.setText(String.valueOf(selectedVital.getPulse()));
+history.deleteVital(selectedVital);
 
-    if (selectedVital.isConscious()) {
-        lblStatus.setText("Yes");
-    } else {
-        lblStatus.setText("No");
-    }
-}
+JOptionPane.showMessageDialog(
+    this,
+    "Vital Sign deleted",
+    "Success",
+    JOptionPane.INFORMATION_MESSAGE);
+
+populateTable();
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
