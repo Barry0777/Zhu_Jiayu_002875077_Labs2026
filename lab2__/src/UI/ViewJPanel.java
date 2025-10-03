@@ -4,13 +4,17 @@
  */
 package UI;
 
+import Model.VitalSign;
 import Model.VitalSignHistory;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author barryzhu
  */
 public class ViewJPanel extends javax.swing.JPanel {
+    
 
     /**
      * Creates new form ViewJPanel
@@ -19,9 +23,28 @@ public class ViewJPanel extends javax.swing.JPanel {
     public ViewJPanel(VitalSignHistory vsh) {
         initComponents();
         this.history = vsh;
+        populateTable();
         
     }
+         private void populateTable() {
+   DefaultTableModel model = (DefaultTableModel) tblVital.getModel();
+             model.setRowCount(0);
 
+       for (VitalSign vs : history.getHistory()) {
+    Object[] row = new Object[5];
+    row[0] = vs;
+    row[1] = vs.getTemperature();
+    row[2] = vs.getBloodPressure();
+    row[3] = vs.getPulse();
+    row[4] = vs.isConscious();
+    
+    
+    model.addRow(row);
+      
+}
+
+  
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,6 +131,11 @@ public class ViewJPanel extends javax.swing.JPanel {
         add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, 100, 20));
 
         btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
         add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
 
         btnDelete.setText("Delete");
@@ -127,8 +155,61 @@ public class ViewJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldTemperatureActionPerformed
 
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblVital.getSelectedRow();
+        if (selectedRow < 0) {
+             JOptionPane.showMessageDialog(this, "Please select a row to view",
+                                          "Warning", JOptionPane.WARNING_MESSAGE);
+            
+        }
+        DefaultTableModel model = (DefaultTableModel) tblVital.getModel();
+VitalSign selectedVital = (VitalSign) model.getValueAt(selectedRow, 0);
+
+if (selectedVital != null) {
+    fieldDate.setText(selectedVital.getDate());
+    fieldTemperature.setText(String.valueOf(selectedVital.getTemperature()));
+    fieldBp.setText(String.valueOf(selectedVital.getBloodPressure()));
+    fieldPulse.setText(String.valueOf(selectedVital.getPulse()));
+
+    if (selectedVital.isConscious()) {
+        lblStatus.setText("Yes");
+    } else {
+        lblStatus.setText("No");
+    }
+}
+        
+    
+    }//GEN-LAST:event_btnViewActionPerformed
+
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblVital.getSelectedRow();
+if (selectedRow < 0) {
+    JOptionPane.showMessageDialog(
+        this,
+        "Please select a row to view",
+        "Warning",
+        JOptionPane.WARNING_MESSAGE
+    );
+}
+
+DefaultTableModel model = (DefaultTableModel) tblVital.getModel();
+VitalSign selectedVital = (VitalSign) model.getValueAt(selectedRow, 0);
+
+if (selectedVital != null) {
+    fieldDate.setText(selectedVital.getDate());
+    fieldTemperature.setText(String.valueOf(selectedVital.getTemperature()));
+    fieldBp.setText(String.valueOf(selectedVital.getBloodPressure()));
+    fieldPulse.setText(String.valueOf(selectedVital.getPulse()));
+
+    if (selectedVital.isConscious()) {
+        lblStatus.setText("Yes");
+    } else {
+        lblStatus.setText("No");
+    }
+}
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 
@@ -149,4 +230,5 @@ public class ViewJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblTemperature;
     private javax.swing.JTable tblVital;
     // End of variables declaration//GEN-END:variables
+
 }
