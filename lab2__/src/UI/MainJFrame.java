@@ -52,7 +52,12 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        btnView.setText("View vital");
+        btnView.setText("View Vital");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
@@ -72,7 +77,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(btnCreate)
                 .addGap(75, 75, 75)
                 .addComponent(btnView)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);
@@ -85,7 +90,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         workAreaLayout.setVerticalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 503, Short.MAX_VALUE)
+            .addGap(0, 494, Short.MAX_VALUE)
         );
 
         splitPane.setRightComponent(workArea);
@@ -116,6 +121,13 @@ public class MainJFrame extends javax.swing.JFrame {
       splitPane.setRightComponent(createJPanel);
 
     }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        ViewJPanel viewJPanel = new ViewJPanel(history);
+        splitPane.setRightComponent(viewJPanel);
+
+    }//GEN-LAST:event_btnViewActionPerformed
 
     /**
      * @param args the command line arguments
