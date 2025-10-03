@@ -4,6 +4,8 @@
  */
 package UI;
 
+import Model.VitalSignHistory;
+
 /**
  *
  * @author barryzhu
@@ -107,7 +109,12 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:// 创建 CreateJPanel，并把 VitalSignHistory 对象传进去
+     CreateJPanel createJPanel = new CreateJPanel(history);
+
+// 把 createJPanel 放到 splitPane 的右侧
+      splitPane.setRightComponent(createJPanel);
+
     }//GEN-LAST:event_btnCreateActionPerformed
 
     /**

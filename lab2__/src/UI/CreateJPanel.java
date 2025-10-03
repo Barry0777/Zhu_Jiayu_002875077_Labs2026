@@ -4,6 +4,8 @@
  */
 package UI;
 
+import Model.VitalSignHistory;
+
 /**
  *
  * @author barryzhu
@@ -69,16 +71,16 @@ public class CreateJPanel extends javax.swing.JPanel {
                 fieldDateActionPerformed(evt);
             }
         });
-        add(fieldDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+        add(fieldDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 110, -1));
 
         fieldTemperature.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldTemperatureActionPerformed(evt);
             }
         });
-        add(fieldTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
-        add(fieldBp, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
-        add(fieldPulse, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
+        add(fieldTemperature, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 110, -1));
+        add(fieldBp, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 110, -1));
+        add(fieldPulse, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 110, -1));
 
         jRadioButton1.setText("Yes");
         add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, 20));
