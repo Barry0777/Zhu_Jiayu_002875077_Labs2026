@@ -6,6 +6,8 @@ package ui.AccountManager;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Account;
 import model.AccountDirectory;
 
 /**
@@ -25,6 +27,9 @@ AccountDirectory accountDirectory;
         initComponents();
         userProcessContainer = container;
             accountDirectory = directory;
+            
+     
+           
 
     }
 
@@ -101,4 +106,8 @@ layout.next(userProcessContainer);
     private javax.swing.JButton btnCreateAccount;
     private javax.swing.JButton btnManageAccount;
     // End of variables declaration//GEN-END:variables
-}
+
+  
+    }
+
+   
