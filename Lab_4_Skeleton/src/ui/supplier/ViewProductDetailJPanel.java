@@ -30,6 +30,11 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         this.workArea = workArea;
         this.product = product;
 
+     
+        
+        
+        
+        
         txtName.setText(this.product.getName());
         txtId.setText(String.valueOf(this.product.getId()));
         txtPrice.setText(String.valueOf(this.product.getPrice()));
@@ -280,6 +285,9 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
     private void btnAddFeatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFeatureActionPerformed
         // TODO add your handling code here:
+        
+        
+        
         Feature newFeature = product.addNewFeature(product);
         newFeature.setName("New Feature");
         newFeature.setValue("Type Value Here");
