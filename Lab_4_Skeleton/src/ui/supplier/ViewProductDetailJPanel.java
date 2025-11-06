@@ -20,7 +20,8 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
     JPanel workArea;
     Product product;
-
+    
+    
     /**
      * Creates new form CreateProductJPanel
      */
