@@ -15,6 +15,10 @@ import ui.AccountManager.AccountMngWorkAreaJPanel;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
+    
+    
+    
+    
     private AccountDirectory accountDirectory; 
     /**
      * Creates new form MainJFrame
@@ -72,16 +76,16 @@ public class MainJFrame extends javax.swing.JFrame {
         topJPanelLayout.setHorizontalGroup(
             topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topJPanelLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(22, 22, 22)
                 .addComponent(btnAccountMng)
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addContainerGap(505, Short.MAX_VALUE))
         );
         topJPanelLayout.setVerticalGroup(
             topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topJPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addComponent(btnAccountMng)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jSplitPane1.setTopComponent(topJPanel);
