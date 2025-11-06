@@ -24,8 +24,10 @@ AccountDirectory accountDirectory;
      */
     public ManageAccountsJPanel(JPanel container, AccountDirectory directory) {
         initComponents();
-        userProcessContainer = container;
-            accountDirectory = directory;
+        this.userProcessContainer = container;
+            this.accountDirectory = directory;
+            
+                    populateTable();
     }
 
     /**
@@ -136,6 +138,7 @@ AccountDirectory accountDirectory;
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:userProcessContainer.remove(this);
+userProcessContainer.remove(this);
 CardLayout layout = (CardLayout) userProcessContainer.getLayout();
 layout.previous(userProcessContainer);
 
@@ -174,23 +177,24 @@ if (selectedRow >= 0) {
 
     private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
         // TODO add your handling code here:
-     int selectedRow = tblAccounts.getSelectedRow();
+        int selectedRow = tblAccounts.getSelectedRow();
 
 if (selectedRow >= 0) {
-
     Account selectedAccount = (Account) tblAccounts.getValueAt(selectedRow, 0);
-    // We want to open ViewJPanel here for the selected account
+
+    ViewAccountJPanel panel = new ViewAccountJPanel(userProcessContainer, accountDirectory, selectedAccount);
+    userProcessContainer.add("ViewAccountJPanel", panel);
+
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.next(userProcessContainer);
+
+    // beyond this line code will execute after you go back to this JPanel
 
 } else {
-    JOptionPane.showMessageDialog(
-            null,
-            "Please select an account from the list to view.",
-            "Warning",
-            JOptionPane.WARNING_MESSAGE
-    );
+    JOptionPane.showMessageDialog(null, "Please select an account from the list to view.", "Warning", JOptionPane.WARNING_MESSAGE);
 }
 
-
+   
     }//GEN-LAST:event_btnViewDetailsActionPerformed
 
 
@@ -205,7 +209,7 @@ if (selectedRow >= 0) {
     private javax.swing.JTextField txtSearchBox;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
+    void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblAccounts.getModel();
 model.setRowCount(0);
 

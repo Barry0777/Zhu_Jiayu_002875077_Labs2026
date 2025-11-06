@@ -22,8 +22,8 @@ AccountDirectory accountDirectory;
      */
     public CreateAccountJPanel(JPanel container, AccountDirectory directory) {
         initComponents();
-        userProcessContainer = container;
-            accountDirectory = directory;
+        this.userProcessContainer = container;
+    this.accountDirectory = directory; 
     }
 
     /**
