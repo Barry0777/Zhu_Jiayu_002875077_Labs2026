@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author 
+ * @author jiayu zhu 
  */
 public class Account {
 
@@ -14,6 +14,8 @@ public class Account {
     private String routingNumber;
     private String accountNumber;
     private int balance;
+    
+    
 
     public String getBankName() {
         return bankName;

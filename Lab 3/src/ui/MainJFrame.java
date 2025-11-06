@@ -11,7 +11,7 @@ import model.AccountDirectory;
 import ui.AccountManager.AccountMngWorkAreaJPanel;
 /**
  *
- * @author xuanliliu
+ * @author jiayu zhu 
  */
 public class MainJFrame extends javax.swing.JFrame {
 

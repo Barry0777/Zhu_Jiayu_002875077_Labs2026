@@ -10,7 +10,7 @@ import model.AccountDirectory;
 
 /**
  *
- * @author xuanliliu
+ * @author jiayu zhu 
  */
 public class AccountMngWorkAreaJPanel extends javax.swing.JPanel {
         JPanel userProcessContainer;

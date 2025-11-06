@@ -12,7 +12,7 @@ import model.Account;
 import model.AccountDirectory;
 /**
  *
- * @author xuanliliu
+ * @author jiayu zhu 
  */
 public class ManageAccountsJPanel extends javax.swing.JPanel {
     

@@ -12,7 +12,7 @@ import model.AccountDirectory;
 
 /**
  *
- * @author xuanliliu
+ * @author jiayu zhu 
  */
 public class CreateAccountJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
