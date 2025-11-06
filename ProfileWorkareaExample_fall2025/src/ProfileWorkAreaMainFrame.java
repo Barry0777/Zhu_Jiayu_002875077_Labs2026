@@ -161,6 +161,12 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         Profile profile = useraccount.getAssociatedPersonProfile();
 
 
+       
+        
+        
+        
+        
+        
         if (profile instanceof EmployeeProfile) {
 
             adminworkarea = new AdminRoleWorkAreaJPanel(business, CardSequencePanel);
