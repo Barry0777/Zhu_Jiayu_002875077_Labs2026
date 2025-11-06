@@ -18,6 +18,9 @@ import Business.UserAccounts.UserAccountDirectory;
  */
 public class Business {
 
+    
+    
+    
     String name;
     PersonDirectory persondirectory; //all people profiles regardless of the role
     FacultyDirectory facultydirectory;
@@ -28,6 +31,9 @@ public class Business {
 
 
     public Business(String n) {
+        
+        
+        
         name = n;
         facultydirectory = new FacultyDirectory();
         persondirectory = new PersonDirectory();
@@ -38,6 +44,7 @@ public class Business {
 
     }
 
+   
     public PersonDirectory getPersonDirectory() {
         return persondirectory;
     }
