@@ -100,12 +100,14 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             .addGroup(actionsidejpanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSign)
+                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSign, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(60, 60, 60))
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,9 +118,9 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
                 .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(4, 4, 4)
                 .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSign)
@@ -161,13 +163,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         Profile profile = useraccount.getAssociatedPersonProfile();
 
 
-       
-        
-        
-        
-        
-        
-        if (profile instanceof EmployeeProfile) {
+       if (profile instanceof EmployeeProfile) {
 
             adminworkarea = new AdminRoleWorkAreaJPanel(business, CardSequencePanel);
             CardSequencePanel.removeAll();
