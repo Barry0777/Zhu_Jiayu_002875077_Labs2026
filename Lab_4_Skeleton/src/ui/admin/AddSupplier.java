@@ -34,7 +34,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author Rushabh
+ * @author jiayu
  */
 public class AddSupplier extends javax.swing.JPanel {
 
@@ -241,10 +241,10 @@ public class AddSupplier extends javax.swing.JPanel {
         // TODO add your handling code here:
         imgLogo.setIcon(null);
 
-    // 如果你在类中保存了图片对象，这里改为清空
+    
     this.logoImage = null;
 
-    // 刷新 UI（确保立即生效）
+    
     imgLogo.revalidate();
     imgLogo.repaint();
   
