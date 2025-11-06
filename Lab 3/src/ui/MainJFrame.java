@@ -55,13 +55,11 @@ public class MainJFrame extends javax.swing.JFrame {
         UserProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 800));
         setSize(new java.awt.Dimension(1000, 800));
 
         jSplitPane1.setDividerLocation(80);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        btnAccountMng.setBackground(new java.awt.Color(51, 153, 255));
         btnAccountMng.setText("Open Account Manager Work Area");
         btnAccountMng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,16 +72,16 @@ public class MainJFrame extends javax.swing.JFrame {
         topJPanelLayout.setHorizontalGroup(
             topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topJPanelLayout.createSequentialGroup()
-                .addGap(214, 214, 214)
+                .addGap(72, 72, 72)
                 .addComponent(btnAccountMng)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(455, Short.MAX_VALUE))
         );
         topJPanelLayout.setVerticalGroup(
             topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topJPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addComponent(btnAccountMng)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jSplitPane1.setTopComponent(topJPanel);
