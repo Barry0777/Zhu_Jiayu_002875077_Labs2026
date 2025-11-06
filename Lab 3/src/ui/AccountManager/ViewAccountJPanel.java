@@ -30,6 +30,11 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
     
     
     public ViewAccountJPanel(JPanel userProcessContainer, AccountDirectory directory, Account account) {
+      
+        
+        
+        
+        
         this(); // 
         this.userProcessContainer = userProcessContainer;
         this.accountDirectory = directory;
