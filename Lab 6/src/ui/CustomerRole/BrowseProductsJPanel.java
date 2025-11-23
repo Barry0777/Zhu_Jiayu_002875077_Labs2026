@@ -519,7 +519,7 @@ public class BrowseProductsJPanel extends javax.swing.JPanel {
         }
     }
      public void refreshProductTables() {
-    // 返回到这个界面时想要刷新的内容写在这里
+   
     populateProductTable();
     populateCartTable();
 }

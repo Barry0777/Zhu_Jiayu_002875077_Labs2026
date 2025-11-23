@@ -143,21 +143,21 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
       private void backAction() {
-    // 先把当前详情页从容器中移除
+    
     userProcessContainer.remove(this);
 
-    // 回退后当前容器中最顶上的就是“上一页”
+    
     Component[] componentArray = userProcessContainer.getComponents();
     Component component = componentArray[componentArray.length - 1];
 
     if (component instanceof ManageProductCatalogJPanel) {
-        // 供应商模块：刷新供应商的产品表
+        
         ManageProductCatalogJPanel panel = (ManageProductCatalogJPanel) component;
         panel.refreshTable();
     } else if (component instanceof BrowseProductsJPanel) {
-        // 客户模块：刷新客户看到的产品列表 / 购物车
+        
         BrowseProductsJPanel panel = (BrowseProductsJPanel) component;
-        panel.refreshProductTables();    // 这个方法我们下一步去 BrowseProductsJPanel 里加
+        panel.refreshProductTables();    
     }
 
     CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -170,22 +170,22 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         String name = txtName.getText().trim();
 
         if (name.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "产品名称不能为空！");
+            javax.swing.JOptionPane.showMessageDialog(this, "name can not be empty！");
             return;
         }
 
         product.setPrice(price);
         product.setProdName(name);
 
-        // 保存成功后，把字段设回只读
+        
         txtName.setEditable(false);
         txtPrice.setEditable(false);
         btnSave.setEnabled(false);
         btnUpdate.setEnabled(true);
 
-        javax.swing.JOptionPane.showMessageDialog(this, "保存成功！");
+        javax.swing.JOptionPane.showMessageDialog(this, "saved!！");
     } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "价格必须是数字！");
+        javax.swing.JOptionPane.showMessageDialog(this, "price must be interger！");
     }
     }//GEN-LAST:event_btnSaveActionPerformed
    

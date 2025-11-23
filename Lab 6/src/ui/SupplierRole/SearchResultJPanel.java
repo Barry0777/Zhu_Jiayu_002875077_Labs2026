@@ -154,11 +154,11 @@ public class SearchResultJPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
     double price = Double.parseDouble(txtPrice.getText().trim());
-    product.setPrice(price);   // 注意：Product.setPrice 也要是 double 版本的
+    product.setPrice(price);   // 
     product.setProdName(txtName.getText());
     
 } catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(this, "价格必须是数字（可以是小数）！");
+    JOptionPane.showMessageDialog(this, "price must be integer！");
     return;
 }
 

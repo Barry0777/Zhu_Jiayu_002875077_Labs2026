@@ -57,7 +57,7 @@ public class MainJFrame extends javax.swing.JFrame {
         userProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Lab 5 Skeleton");
+        setTitle("Lab7");
         setBackground(new java.awt.Color(240, 240, 240));
 
         splitPane.setDividerLocation(150);
