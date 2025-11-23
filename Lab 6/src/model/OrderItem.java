@@ -9,6 +9,7 @@ package model;
  * @author pearl
  */
 public class OrderItem {
+    
     Product product;
     double salesPrice;
     int quantity;

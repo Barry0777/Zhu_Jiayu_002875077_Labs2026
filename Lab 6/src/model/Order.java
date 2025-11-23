@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class Order {
     
     ArrayList<OrderItem> orderItemList;
+    
+    
 
     public Order() {
         this.orderItemList = new ArrayList<OrderItem>();

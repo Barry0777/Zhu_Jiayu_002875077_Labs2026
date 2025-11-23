@@ -12,6 +12,8 @@ public class Business {
     
      MasterOrderList masterOrderList;
     SupplierDirectory supplierDirectory;
+    
+    
 
     public Business() {
         this.masterOrderList = new MasterOrderList();
