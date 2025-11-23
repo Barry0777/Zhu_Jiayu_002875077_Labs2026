@@ -1,163 +1,139 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package analytics;
 
-/**
- *
- * @author harshalneelkamal
- */
-
 import data.DataStore;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import model.Comment;
 import model.Post;
 import model.User;
 
-
 public class AnalysisHelper {
-    //Find Average number of likes per comment.
-    //TODO
+
+    /* ---------------- Q1 ---------------- */
     public void getAverageLikesPerComments() {
-        Map<Integer, Comment> comments = DataStore.getInstance().getComments();
-        int likeNumber = 0;
-        int commentNumber = comments.size();
-        for (Comment c : comments.values()) {
-            likeNumber += c.getLikes();
-        }
-        
-        System.out.println("Q1 - Average number of likes per comments: " + likeNumber / commentNumber);
-            
-    }
-    
-    public void getMaxLikeCommentPost () {
-        DataStore data = DataStore.getInstance();
-        Comment commentWithMaxLikes = null;
+        Collection<Comment> comments = DataStore.getInstance().getComments().values();
 
-        for (Comment c: data.getComments().values()) {
-            if (commentWithMaxLikes == null) {
-                commentWithMaxLikes = c;
-            }
-            if (c.getLikes() > commentWithMaxLikes.getLikes()) {
-                commentWithMaxLikes = c;
+        int sumLikes = 0;
+        for (Comment c : comments) {
+            sumLikes += c.getLikes();
+        }
+
+        double avg = comments.isEmpty() ? 0 : (double) sumLikes / comments.size();
+        System.out.println("Q1 - Average likes per comment: " + (int) avg);
+    }
+
+    /* ---------------- Q2 ---------------- */
+    public void getMaxLikeCommentPost() {
+        DataStore ds = DataStore.getInstance();
+        Comment best = null;
+
+        for (Comment c : ds.getComments().values()) {
+            if (best == null || c.getLikes() > best.getLikes()) {
+                best = c;
             }
         }
 
-        int postId = commentWithMaxLikes.getPostId();
+        if (best != null) {
+            System.out.println("Q2 - Post with most-liked comment: " + best.getPostId());
+        }
+    }
 
-        System.out.println("Q2 - post with most likes per comment " + data.getPosts().get(postId).getPostId());
-        
-    }
-    
-     public void getPostwithMostcomments () {
-        DataStore data = DataStore.getInstance();
-        Post postWithMostComments = null;
-        for (Post p : data.getPosts().values()) {
-            if (postWithMostComments == null) {
-                postWithMostComments = p;
-            }
-            if (p.getComments().size() > postWithMostComments. getComments().size()) {
-                    postWithMostComments = p;
-            }
-        }
-        
-        System.out.println("Q3 - post with most comments " + postWithMostComments.getPostId());
-    }
-     
-     public void getPassiveUsers() {
-        DataStore data = DataStore.getInstance(); 
-        
-        HashMap<Integer, Integer> postNumbers = new HashMap<Integer, Integer>();
-        
-        for (Post p: data.getPosts().values()) {
-            
- 
-            int userId = p.getUserId();
-            if (postNumbers.containsKey(userId)) {
-                postNumbers. put(userId, postNumbers.get(userId) + 1);
-            } else {
-                postNumbers.put(userId, 1);
-            }
-            
-        }
-        
-        ArrayList<User> users = new ArrayList(data.getUsers().values());
-        
-        Collections.sort(users, new UserMapComparator(postNumbers));
-        System. out.println("Q4 - The following users have the least posts: ");
-        for (int i = 0; i < 5; i++) {
-        System. out. println (users.get(i) + ", - Post count: " + postNumbers.get(users.get(i).getId()));
-        }
-    }
-    
-     public void getPassiveCommentUsers() {
-        
-        DataStore data = DataStore.getInstance();
-        HashMap<Integer, Integer> commentNumbers = new HashMap<Integer, Integer>();
-        for (Comment c : data.getComments().values()) {
-            int userId = c.getUserId();
-            if (commentNumbers.containsKey(userId)) {
-                commentNumbers.put(userId, commentNumbers.get(userId) + 1);
-            } else {
-                commentNumbers. put (userId, 1);
-            }
-            
-        }
-               
-        ArrayList<User> users = new ArrayList(data. getUsers().values());
-        
-        Collections. sort (users, new UserMapComparator(commentNumbers));
-        
-        System.out.println("Q5 - The following users have the least comments: ");
-        
-        for (int i = 0; i < 5; i++) {
-            System.out.println(users.get(i) + ", - Comment count: " + commentNumbers.get(users.get(i).getId()));
-        }
-    }
-    
-     public void getPassiveAndActiveoverallUsers () {
-        
-        DataStore data = DataStore.getInstance() ;
-        HashMap<Integer, Integer> overallNumbers = new HashMap<Integer, Integer> ();
-        for (Comment c : data.getComments().values()) {
-            int userId = c.getUserId();
-            if (overallNumbers.containsKey(userId)) {
-                overallNumbers.put(userId, overallNumbers. get (userId) + 1 + c.getLikes());
-            } else {
-                overallNumbers.put(userId, 1 + c.getLikes());
-            }
-        }
-        for (Post p: data.getPosts (). values ()) {
-        int userId = p.getUserId ();
-        if (overallNumbers.containsKey(userId)) {
-            overallNumbers.put(userId, overallNumbers.get(userId) + 1);
-        }
-        else {
-            overallNumbers. put (userId, 1);
-        }
-        }
-        
-        
-        ArrayList<User> users = new ArrayList(data.getUsers().values());
-        Collections.sort(users, new UserMapComparator(overallNumbers)) ;
-        
-        System.out.println("Q6 - The following users have overall been passive: ");
-        for (int i = 0; i < 5; i++) {
-            System.out.println(users.get(i) + ", - Overall count: " + overallNumbers.get(users.get(i).getId()));
-        }
-        
-        
-        System.out.println("Q7 - The following users have overall been active: ");
-        for (int i = users.size()-1; i > users.size()-6; i--) {
-           System.out.println(users.get(i) + ", - Overall count: " + overallNumbers.get(users.get(i).getId()));
-        }               
-    }
-        
+    /* ---------------- Q3 ---------------- */
+    public void getPostwithMostcomments() {
+        DataStore ds = DataStore.getInstance();
+        Post maxPost = null;
 
-     
+        for (Post p : ds.getPosts().values()) {
+            if (maxPost == null || p.getComments().size() > maxPost.getComments().size()) {
+                maxPost = p;
+            }
+        }
+
+        if (maxPost != null) {
+            System.out.println("Q3 - Post with most comments: " + maxPost.getPostId());
+        }
+    }
+
+    /* 工具函数：依照统计值排序用户（升序） */
+    private List<User> sortedUsersBy(Map<Integer, Integer> map) {
+        List<User> users = new ArrayList<>(DataStore.getInstance().getUsers().values());
+
+        users.sort((a, b) -> {
+            int x = map.getOrDefault(a.getId(), 0);
+            int y = map.getOrDefault(b.getId(), 0);
+            return Integer.compare(x, y);
+        });
+
+        return users;
+    }
+
+    /* ---------------- Q4 ---------------- */
+    public void getPassiveUsers() {
+        Map<Integer, Integer> count = new HashMap<>();
+        DataStore ds = DataStore.getInstance();
+
+        for (Post p : ds.getPosts().values()) {
+            int uid = p.getUserId();
+            count.put(uid, count.getOrDefault(uid, 0) + 1);
+        }
+
+        List<User> result = sortedUsersBy(count);
+
+        System.out.println("Q4 - Users with least posts:");
+        for (int i = 0; i < Math.min(5, result.size()); i++) {
+            User u = result.get(i);
+            System.out.println(u + " - posts: " + count.getOrDefault(u.getId(), 0));
+        }
+    }
+
+    /* ---------------- Q5 ---------------- */
+    public void getPassiveCommentUsers() {
+        Map<Integer, Integer> count = new HashMap<>();
+        DataStore ds = DataStore.getInstance();
+
+        for (Comment c : ds.getComments().values()) {
+            int uid = c.getUserId();
+            count.put(uid, count.getOrDefault(uid, 0) + 1);
+        }
+
+        List<User> sorted = sortedUsersBy(count);
+
+        System.out.println("Q5 - Users with least comments:");
+        for (int i = 0; i < Math.min(5, sorted.size()); i++) {
+            User u = sorted.get(i);
+            System.out.println(u + " - comments: " + count.getOrDefault(u.getId(), 0));
+        }
+    }
+
+    /* ---------------- Q6 + Q7 ---------------- */
+    public void getPassiveAndActiveoverallUsers() {
+
+        Map<Integer, Integer> score = new HashMap<>();
+        DataStore ds = DataStore.getInstance();
+
+        /* comments contribute = 1 per comment + likes */
+        for (Comment c : ds.getComments().values()) {
+            int uid = c.getUserId();
+            score.put(uid, score.getOrDefault(uid, 0) + 1 + c.getLikes());
+        }
+
+        /* posts contribute = 1 each */
+        for (Post p : ds.getPosts().values()) {
+            int uid = p.getUserId();
+            score.put(uid, score.getOrDefault(uid, 0) + 1);
+        }
+
+        List<User> sorted = sortedUsersBy(score);
+
+        System.out.println("Q6 - Least active users:");
+        for (int i = 0; i < Math.min(5, sorted.size()); i++) {
+            User u = sorted.get(i);
+            System.out.println(u + " - overall: " + score.get(u.getId()));
+        }
+
+        System.out.println("Q7 - Most active users:");
+        for (int i = sorted.size() - 1; i >= Math.max(sorted.size() - 5, 0); i--) {
+            User u = sorted.get(i);
+            System.out.println(u + " - overall: " + score.get(u.getId()));
+        }
+    }
 }
