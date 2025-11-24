@@ -57,7 +57,8 @@ public class AnalysisHelper {
         }
     }
 
-    /* 工具函数：依照统计值排序用户（升序） */
+   
+    
     private List<User> sortedUsersBy(Map<Integer, Integer> map) {
         List<User> users = new ArrayList<>(DataStore.getInstance().getUsers().values());
 
