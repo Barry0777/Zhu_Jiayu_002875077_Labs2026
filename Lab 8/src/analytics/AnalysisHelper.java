@@ -20,6 +20,7 @@ public class AnalysisHelper {
         double avg = comments.isEmpty() ? 0 : (double) sumLikes / comments.size();
         System.out.println("Q1 - Average likes per comment: " + (int) avg);
     }
+    
 
     /* ---------------- Q2 ---------------- */
     public void getMaxLikeCommentPost() {
