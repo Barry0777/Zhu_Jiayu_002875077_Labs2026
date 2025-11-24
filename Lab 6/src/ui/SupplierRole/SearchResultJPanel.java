@@ -12,6 +12,7 @@ import javax.swing.JPanel;
  */
 public class SearchResultJPanel extends javax.swing.JPanel {
 
+    
     private JPanel userProcessContainer;
     private Product product;
     public SearchResultJPanel(JPanel upc, Product p) {
