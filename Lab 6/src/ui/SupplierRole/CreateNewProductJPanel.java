@@ -139,36 +139,68 @@ public class CreateNewProductJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        double price = 0.0;
-        int quantity = 0;
-        
-        try {
-            
-            price = Double.parseDouble(txtPrice.getText());
-            quantity = Integer.parseInt(txtAvailability.getText());
-            
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(this, "Please check the price and quantity formats", "Info", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        
-        Product p = supplier.getProductCatalog().addProduct();
-        p.setProdName(txtName.getText());
-        p.setPrice(price);
-        p.setAvail(quantity);
-        
-        JOptionPane.showMessageDialog(null, "Product added!", "Info", JOptionPane.INFORMATION_MESSAGE);
+     
+// --- Step 1: 读取输入 ---
+    String nameInput = txtName.getText().trim();
+    String priceInput = txtPrice.getText().trim();
+    String stockInput = txtAvailability.getText().trim();
+
+    // --- Step 2: 校验空值 ---
+    if (nameInput.isEmpty() || priceInput.isEmpty() || stockInput.isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+                "All fields must be filled.", 
+                "Warning", 
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // --- Step 3: 解析数据 ---
+    double priceVal;
+    int qtyVal;
+
+    try {
+        priceVal = Double.parseDouble(priceInput);
+        qtyVal = Integer.parseInt(stockInput);
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, 
+                "Invalid number format for price or quantity.", 
+                "Input Error", 
+                JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // --- Step 4: 创建产品对象 ---
+    Product newProd = supplier.getProductCatalog().addProduct();
+    newProd.setProdName(nameInput);
+    newProd.setPrice(priceVal);
+    newProd.setAvail(qtyVal);
+
+    // --- Step 5: 成功提示 ---
+    JOptionPane.showMessageDialog(this, 
+            "New product added successfully!", 
+            "Success", 
+            JOptionPane.INFORMATION_MESSAGE);
+
+    // --- Step 6: 可选：清空输入框 ---
+    txtName.setText("");
+    txtPrice.setText("");
+    txtAvailability.setText("");
+    
 }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
-        userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        ManageProductCatalogJPanel manageProductCatalogJPanel = (ManageProductCatalogJPanel) component;
-        manageProductCatalogJPanel.refreshTable();
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+        // 移除当前页面
+    userProcessContainer.remove(this);
+
+    Component[] components = userProcessContainer.getComponents();
+    Component lastComp = components[components.length - 1];
+
+    if (lastComp instanceof ManageProductCatalogJPanel panel) {
+        panel.refreshTable();
+    }
+
+    ((CardLayout) userProcessContainer.getLayout()).previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

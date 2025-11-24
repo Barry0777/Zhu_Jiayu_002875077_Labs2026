@@ -124,9 +124,32 @@ public class AddSupplierJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        Supplier supplier = supplierDirectory.addSupplier();
-        supplier.setSupplyName(txtName.getText());
-        JOptionPane.showMessageDialog(null, "Supplier added successfully!!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        String name = txtName.getText().trim();
+
+    // 小校验（避免空的供应商名）
+    if (name.isEmpty()) {
+        JOptionPane.showMessageDialog(
+                this,
+                "Supplier name cannot be empty.",
+                "Warning",
+                JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    // 创建供应商（逻辑不变，只是换了写法风格）
+    Supplier newSupplier = supplierDirectory.addSupplier();
+    newSupplier.setSupplyName(name);
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Supplier \"" + name + "\" added successfully!",
+            "Info",
+            JOptionPane.INFORMATION_MESSAGE
+    );
+
+    // 清空输入框，让 UI 更友好
+    txtName.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -136,12 +159,19 @@ public class AddSupplierJPanel extends javax.swing.JPanel {
 
     private void backAction(){
         userProcessContainer.remove(this);
-        Component [] componentArray = userProcessContainer.getComponents();
-        Component c = componentArray[componentArray.length-1];
-        ManageSuppliersJPanel ms = (ManageSuppliersJPanel) c;
-        ms.refreshTable();
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+
+    Component[] stack = userProcessContainer.getComponents();
+    if (stack.length > 0) {
+        Component last = stack[stack.length - 1];
+
+        // ★ 更安全的写法（你朋友没写）
+        if (last instanceof ManageSuppliersJPanel) {
+            ((ManageSuppliersJPanel) last).refreshTable();
+        }
+    }
+
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.previous(userProcessContainer);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

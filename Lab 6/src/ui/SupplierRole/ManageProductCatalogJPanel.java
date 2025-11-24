@@ -28,19 +28,21 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
     }
 
     public void refreshTable() {
+    DefaultTableModel model = (DefaultTableModel) tblProductCatalog.getModel();
+    model.setRowCount(0);
 
-        DefaultTableModel model = (DefaultTableModel) tblProductCatalog.getModel();
-        model.setRowCount(0);
+    var productList = supplier.getProductCatalog().getProductcatalog();
 
-        for (Product p : supplier.getProductCatalog().getProductcatalog()) {
-            Object row[] = new Object[4];
-            row[0] = p;
-            row[1] = p.getModelNumber();
-            row[2] = p.getPrice();
-            row[3] = p.getAvail();
-            model.addRow(row);
-        }
+    for (Product prod : productList) {
+        model.addRow(new Object[]{
+                prod,
+                prod.getModelNumber(),
+                prod.getPrice(),
+                prod.getAvail()
+        });
     }
+}
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -171,38 +173,43 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
 
-        CreateNewProductJPanel cnpjp = new CreateNewProductJPanel(userProcessContainer, supplier);
-        userProcessContainer.add("CreateNewProductJPanel", cnpjp);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+       var createPanel = new CreateNewProductJPanel(userProcessContainer, supplier);
+
+    userProcessContainer.add("CreateNewProductJPanel", createPanel);
+    ((CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        SearchForProductJPanel sfpjp = new SearchForProductJPanel(userProcessContainer, supplier);
-        userProcessContainer.add("SearchForProductJPanel", sfpjp);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        var searchPanel = new SearchForProductJPanel(userProcessContainer, supplier);
+
+    userProcessContainer.add("SearchForProductJPanel", searchPanel);
+    ((CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
         userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+    ((CardLayout) userProcessContainer.getLayout()).previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        int selectedRowIndex = tblProductCatalog.getSelectedRow();
+        int row = tblProductCatalog.getSelectedRow();
 
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        Product s = (Product) tblProductCatalog.getValueAt(selectedRowIndex, 0);
-        supplier.getProductCatalog().removeProduct(s);
-        refreshTable();
+    if (row < 0) {
+        JOptionPane.showMessageDialog(this,
+                "Select a product to delete.",
+                "Warning",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    Product target = (Product) tblProductCatalog.getValueAt(row, 0);
+
+    supplier.getProductCatalog().removeProduct(target);
+
+    refreshTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

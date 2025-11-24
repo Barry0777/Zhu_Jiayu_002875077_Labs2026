@@ -90,24 +90,41 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        try{
-        Product p;
-        int productId = Integer.parseInt(txtId.getText());
-        p = supplier.getProductCatalog().searchProduct(productId);
-        if(p!=null){
-        SearchResultJPanel vpdjp = new SearchResultJPanel(userProcessContainer, p);
-        userProcessContainer.add("SearchResultJPanel", vpdjp);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Nothing found", "No result found matching your criteria!!", JOptionPane.WARNING_MESSAGE);
-            //return;
-        }
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Nothing found", "No result found matching your criteria!!", JOptionPane.WARNING_MESSAGE);
-        }
+         String input = txtId.getText().trim();
+
+    if (input.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+                "Please enter a Product ID.",
+                "Input Required",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int id;
+    try {
+        id = Integer.parseInt(input);
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this,
+                "Product ID must be a number.",
+                "Invalid Input",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    Product result = supplier.getProductCatalog().searchProduct(id);
+
+    if (result == null) {
+        JOptionPane.showMessageDialog(this,
+                "No product found for ID: " + id,
+                "Not Found",
+                JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    // navigate to result panel
+    SearchResultJPanel panel = new SearchResultJPanel(userProcessContainer, result);
+    userProcessContainer.add("SearchResultJPanel", panel);
+    ((CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
 }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -117,12 +134,15 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
 
       private void backAction() {
         userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        ManageProductCatalogJPanel manageProductCatalogJPanel = (ManageProductCatalogJPanel) component;
-        manageProductCatalogJPanel.refreshTable();
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+
+    Component[] list = userProcessContainer.getComponents();
+    Component last = list[list.length - 1];
+
+    if (last instanceof ManageProductCatalogJPanel) {
+        ((ManageProductCatalogJPanel) last).refreshTable();
+    }
+
+    ((CardLayout) userProcessContainer.getLayout()).previous(userProcessContainer);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

@@ -432,56 +432,61 @@ public class BrowseProductsJPanel extends javax.swing.JPanel {
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
         // TODO add your handling code here:
         
-        int selectedRowIndex = tblProductCatalog.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane. showMessageDialog(this, "Please select the product first.");
-            return;
-        }
-        
-        Product product = (Product) tblProductCatalog.getValueAt(selectedRowIndex, 0);
-        double salesPrice = 0;
-        int quant = 0;
-        
-        try {
-            salesPrice = Double.parseDouble(txtSalesPrice.getText());
-            quant = (Integer) spnQuantity.getValue();
-        } catch (Exception e) {
-            JOptionPane. showMessageDialog(this, "Please check the price and quantity fields.");
-            return;
-        }
-        
-        if (salesPrice < product.getPrice()) {
-            JOptionPane. showMessageDialog(this, "Price should be more than it is set in the price.");
-            return;
-        }
-        
-        OrderItem item = currentOrder.findProduct(product);
-        
-        
-        if (item == null) {
-            
-            if (product.getAvail() >= quant) {
-                
-                currentOrder.addNewOrderItem(product, salesPrice, quant);
-                product.setAvail(product.getAvail() - quant);
-            } else {
-                JOptionPane. showMessageDialog(this, "Please check product availability.");
-                return;
-            }
+       
+
+    int row = tblProductCatalog.getSelectedRow();
+    if (row < 0) {
+        JOptionPane.showMessageDialog(this, "Select a product first.");
+        return;
+    }
+
+    Product product = (Product) tblProductCatalog.getValueAt(row, 0);
+
+    double price;
+    int qty;
+
+    try {
+        price = Double.parseDouble(txtSalesPrice.getText().trim());
+        qty = (Integer) spnQuantity.getValue();
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Invalid price or quantity.");
+        return;
+    }
+
+    if (price < product.getPrice()) {
+        JOptionPane.showMessageDialog(this, "Sales price cannot be below base price.");
+        return;
+    }
+
+    OrderItem existing = currentOrder.findProduct(product);
+
+    if (existing == null) {
+        // new item
+        if (qty <= product.getAvail()) {
+            currentOrder.addNewOrderItem(product, price, qty);
+            product.setAvail(product.getAvail() - qty);
         } else {
-            
-            int oldQuant = item.getQuantity();
-            if (item.getProduct().getAvail() + oldQuant < quant) {
-                JOptionPane. showMessageDialog(this, "Please check product availability.");
-                return;
-            }
-            
-            item.getProduct().setAvail(item.getProduct().getAvail()+oldQuant-quant);
-            item.setQuantity(quant);
+            JOptionPane.showMessageDialog(this, "Insufficient inventory.");
+            return;
         }
-        
-        populateProductTable();
-        populateCartTable();
+    } else {
+        // modify existing
+        int old = existing.getQuantity();
+        int available = old + product.getAvail();
+
+        if (qty > available) {
+            JOptionPane.showMessageDialog(this, "Insufficient inventory.");
+            return;
+        }
+
+        product.setAvail(available - qty);
+        existing.setQuantity(qty);
+    }
+
+    populateProductTable();
+    populateCartTable();
+
+
     }//GEN-LAST:event_btnAddToCartActionPerformed
 
     
@@ -526,21 +531,26 @@ public class BrowseProductsJPanel extends javax.swing.JPanel {
 
 
      void populateProductTable() {
-        Supplier selectedSupplier = (Supplier) cmbSupplier.getSelectedItem ();
-        if (selectedSupplier == null) {
-            return;
-        }
-        DefaultTableModel model = (DefaultTableModel) tblProductCatalog.getModel();
-        model.setRowCount (0);
-        for (Product p : selectedSupplier.getProductCatalog().getProductcatalog()) {
-            Object row[] = new Object[4];
-            row [0] = p;
-            row [1] = p.getModelNumber();
-            row [2] = p.getPrice();
-            row[3] = p.getAvail();
-            model.addRow(row);
-        }
+    Object sel = cmbSupplier.getSelectedItem();
+    if (!(sel instanceof Supplier)) {
+        ((DefaultTableModel) tblProductCatalog.getModel()).setRowCount(0);
+        return;
     }
+
+    Supplier supplier = (Supplier) sel;
+    DefaultTableModel model = (DefaultTableModel) tblProductCatalog.getModel();
+    model.setRowCount(0);
+
+    supplier.getProductCatalog().getProductcatalog().forEach(prod -> {
+        model.addRow(new Object[]{
+                prod,
+                prod.getModelNumber(),
+                prod.getPrice(),
+                prod.getAvail()
+        });
+    });
+}
+
     
      void populateCartTable() {
         
